@@ -18,5 +18,9 @@ Route::get('/', function () {
 });
 
 Route::get('/hello', function () {
-    return view('hello');
+    $variable = 'hello from here';
+    return view('hello',
+        $data = [
+            'test' => $variable
+        ]);
 });
