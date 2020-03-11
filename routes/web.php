@@ -19,8 +19,10 @@ Route::get('/', function () {
 
 Route::get('/hello', function () {
     $variable = 'hello from here';
+    $name = 'John';
     return view('hello',
         $data = [
-            'test' => $variable
+            'test' => $variable,
+            'name' => $name
         ]);
 });
