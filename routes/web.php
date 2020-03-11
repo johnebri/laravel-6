@@ -17,12 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello', function () {
-    $variable = 'hello from here';
-    $name = 'John';
-    return view('hello',
-        $data = [
-            'test' => $variable,
-            'name' => $name
-        ]);
-});
+Route::get('/hello', 'HelloController@index');
