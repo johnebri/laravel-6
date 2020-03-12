@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 
 class HelloController extends Controller
 {
-    public function index()
+    public function about()
     {
-        $variable = 'hello from here';
-        $name = 'John';
-        return view('hello',
-            $data = [
-                'test' => $variable
-            ]);
+        return view('about');
+    }
+
+    public function services()
+    {
+        return view('services');
     }
 }
