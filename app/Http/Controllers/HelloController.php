@@ -13,6 +13,12 @@ class HelloController extends Controller
 
     public function services()
     {
-        return view('services');
+        $services = [
+            'Service One',
+            'Service 2',
+            'Service 3',
+            'Service 4'
+        ];
+        return view('services', compact('services'));
     }
 }

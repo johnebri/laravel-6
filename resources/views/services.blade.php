@@ -6,9 +6,14 @@
     <h1>Services</h1>
 
     <ul>
-        <li>Service 1</li>
-        <li>Service 2</li>
-        <li>Service 3</li>
+        {{-- @foreach($services as $service)
+            <li>{{ $service }} </li>
+        @endforeach --}}
+        @forelse($services as $service)
+            <li>{{ $service }}
+            @empty
+                <li>No Services available
+        @endforelse
     </ul>
 
 @endsection
