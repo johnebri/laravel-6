@@ -11,19 +11,5 @@ class HelloController extends Controller
         return view('about');
     }
 
-    public function services()
-    {
-        // $services = [
-        //     'Service One',
-        //     'Service 2',
-        //     'Service 3',
-        //     'Service 4'
-        // ];
 
-        $services = \App\Service::all();
-
-        // dd($services);
-
-        return view('services', compact('services'));
-    }
 }
