@@ -35,4 +35,8 @@ class ServiceController extends Controller
 
         return redirect()->back();
     }
+
+    public function new() {
+        // this is a new controller
+    }
 }
