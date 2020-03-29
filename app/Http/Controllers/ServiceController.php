@@ -28,10 +28,11 @@ class ServiceController extends Controller
             'name' => 'required|min:5|max:10'
         ]);
 
-        $service = new \App\Service();
+        \App\Service::create($data);
 
-        $service->name = request('name');
-        $service->save();
+        // $service = new \App\Service();
+        // $service->name = request('name');
+        // $service->save();
 
         return redirect()->back();
     }
