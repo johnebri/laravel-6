@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +30,14 @@ Route::post('/customers', 'CustomerController@store');
 Route::get('/customers/{customer}', 'CustomerController@show'); 
 Route::get('/customers/{customer}/edit', 'CustomerController@edit'); 
 Route::patch('/customers/{customer}', 'CustomerController@update'); 
+Route::delete('/customers/{customer}', 'CustomerController@destroy');
+
+
+Route::get('/email', function () {
+    Mail::to('email@email.com')->send(new WelcomeMail());
+    return new WelcomeMail();
+});
 
 // when controller returns just a view
-// Route::view('/about', 'about');
+// Route::view('/about', 'about');  
 // Route::view('/services', 'services');

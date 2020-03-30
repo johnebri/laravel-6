@@ -3,53 +3,74 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Customer;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
 
 class CustomerController extends Controller
 {
-    public function index() 
+    public function index(Request $request) 
     {
-        $customers = \App\Customer::all();
+        // $customers = Customer::all();
+        $customers = Customer::where('active', $request->query('active', 1))->get();
         return view('customer.index', compact('customers'));
     }
 
     public function create() 
     {
-        return view('customer.create');
+        $customer = new Customer();
+        return view('customer.create', compact('customer'));
     }
 
     public function store() 
     {
-        $data = request()->validate([
-            'name' => 'required',
-            'email' => 'required|email'
-        ]);
+        // $data = request()->validate([
+        //     'name' => 'required',
+        //     'email' => 'required|email'
+        // ]);
 
-        \App\Customer::create($data);
-        return redirect('/customers'); 
+        $customer = Customer::create($this->validateData());   
+        Mail::to($customer->email)->send(new WelcomeMail());
+        return redirect('/customers/'.$customer->id); 
     }
  
-    public function show(\App\Customer $customer) 
+    public function show(Customer $customer) 
     {
-        // $customer =\App\Customer::findOrFail($customerId); 
+        // $customer =Customer::findOrFail($customerId); 
 
         return view('customer.show', compact('customer'));
     }
 
-    public function edit(\App\Customer $customer) 
+    public function edit(Customer $customer) 
     {
         return view('customer.edit', compact('customer'));
     }
 
-    public function update(\App\Customer $customer) 
+    public function update(Customer $customer) 
     {
-        $data = request()->validate([
+        // $data = request()->validate([
+        //     'name' => 'required',
+        //     'email' => 'required|email'
+        // ]);
+
+        $customer->update($this->validateData());
+
+        return redirect('/customers'); 
+    }
+
+    public function destroy(Customer $customer) 
+    {
+        $customer->delete();
+        return redirect('/customers ');
+    }
+
+    protected function validateData() 
+    {
+        return request()->validate([
             'name' => 'required',
             'email' => 'required|email'
         ]);
 
-        $customer->update($data);
-        
-        return redirect('/customers'); 
     }
     
 }
