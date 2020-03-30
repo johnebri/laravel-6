@@ -4,7 +4,11 @@
 
 @forelse($customers as $customer)
 
-    <p><strong> {{ $customer->name }}</strong>
+    <p><strong> 
+        <a href="/customers/{{ $customer->id }} ">
+            {{ $customer->name }}
+        </a>
+    </strong>
         ({{ $customer->email}})
     </p>
 
